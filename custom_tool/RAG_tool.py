@@ -8,7 +8,7 @@ class ragInput(BaseModel):
 
 rag_tool = StructuredTool.from_function(
     func = rag_tool_function,
-    name = 'search_in_documents',
+    name = 'rag_tool',
     description = "Use this tool to answer questions about the content of the uploaded documents.",
     args_schema = ragInput
 )
