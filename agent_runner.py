@@ -34,16 +34,16 @@ chat_history = RedisChatMessageHistory(
     ttl=3600,
 )
 
-# memory = ConversationBufferMemory(
-#     memory_key="chat_history",
-#     chat_memory=chat_history,
-#     return_messages=True
-# )
+memory = ConversationBufferMemory(
+    memory_key="chat_history",
+    chat_memory=chat_history,
+    return_messages=True
+)
 
 
 agent = create_tool_calling_agent(llm=llm, tools=tools,  prompt=prompt )
 
-agent_executor = AgentExecutor(agent=agent,tools=tools, verbose=True)
+agent_executor = AgentExecutor(agent=agent,tools=tools,memory=memory, verbose=True)
 
 def run_agent(input_text : str) -> str:
     response = agent_executor.invoke({"input": input_text})
